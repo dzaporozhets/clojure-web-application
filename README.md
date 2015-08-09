@@ -10,6 +10,14 @@ Merge requests to this projects are welcome!
 * Registration
 * Login
 * Profile page with ability to remove account
+* PostgreSQL database with migrations
+* Layout with Bootstrap css and jQuery
+
+## Screenshot
+
+Just in case you are curious how it looks when started
+
+![Screenshot_from_2015-08-09_20_13_20](https://gitlab.com/dzaporozhets/clojure-web-application/uploads/ced6d7329c4e5324222912b51d4699f6/Screenshot_from_2015-08-09_20_13_20.png)
 
 ## TODO
 
