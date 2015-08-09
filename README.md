@@ -17,7 +17,7 @@ Merge requests to this projects are welcome!
 
 Just in case you are curious how it looks when started
 
-![Screenshot_from_2015-08-09_20_13_20](https://gitlab.com/dzaporozhets/clojure-web-application/uploads/ced6d7329c4e5324222912b51d4699f6/Screenshot_from_2015-08-09_20_13_20.png)
+![Screenshot_from_2015-08-09_20_15_52](https://gitlab.com/dzaporozhets/clojure-web-application/uploads/ba59aa36be4d5c5660355d7e5c93e30f/Screenshot_from_2015-08-09_20_15_52.png)
 
 ## TODO
 
