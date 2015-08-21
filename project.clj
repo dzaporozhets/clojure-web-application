@@ -16,7 +16,7 @@
             [migratus-lein "0.1.2"]]
   :migratus {:store :database
              :migration-dir "migrations"
-             :db "postgresql://localhost:5432/sample"}
+             :db (or (System/getenv "DATABASE_URL") "postgresql://localhost:5432/sample")}
   :ring {:handler sample.handler/app}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
