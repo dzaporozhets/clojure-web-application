@@ -17,7 +17,8 @@
   :migratus {:store :database
              :migration-dir "migrations"
              :db (or (System/getenv "DATABASE_URL") "postgresql://localhost:5432/sample")}
-  :ring {:handler sample.handler/app}
+  :ring {:handler sample.handler/app
+         :init sample.handler/init}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [kerodon "0.6.0"]
