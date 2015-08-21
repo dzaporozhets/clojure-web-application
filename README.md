@@ -1,5 +1,7 @@
 # Sample web application built with Clojure
 
+[![build status](https://ci.gitlab.com/projects/6306/status.png?ref=master)](https://ci.gitlab.com/projects/6306?ref=master)
+
 The goal of this project is to make blank web application with authentication and tests.
 It can be used as template for starting new project on Clojure or for learning Clojure.
 
