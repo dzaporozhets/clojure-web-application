@@ -9,7 +9,7 @@
                  [org.clojure/java.jdbc "0.6.1"]
                  [lib-noir "0.7.6"]
                  [clj-time "0.10.0"]
-                 [migratus "0.8.0"]
+                 [migratus "0.9.8"]
                  [prone "1.1.4"]
                  [ring/ring-defaults "0.3.1"]]
   :plugins [[lein-ring "0.9.2"]
