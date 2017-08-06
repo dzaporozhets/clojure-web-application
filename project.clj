@@ -13,6 +13,7 @@
                  [prone "0.8.2"]
                  [ring/ring-defaults "0.1.2"]]
   :plugins [[lein-ring "0.9.2"]
+            [lein-ancient "0.6.10"]
             [migratus-lein "0.1.2"]]
   :migratus {:store :database
              :migration-dir "migrations"
