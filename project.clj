@@ -10,8 +10,8 @@
                  [lib-noir "0.7.6"]
                  [clj-time "0.10.0"]
                  [migratus "0.8.0"]
-                 [prone "0.8.2"]
-                 [ring/ring-defaults "0.1.2"]]
+                 [prone "1.1.4"]
+                 [ring/ring-defaults "0.3.1"]]
   :plugins [[lein-ring "0.9.2"]
             [lein-ancient "0.6.10"]
             [migratus-lein "0.5.0"]]
@@ -22,6 +22,6 @@
          :init sample.handler/init}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [kerodon "0.6.0"]
-                        [ring-mock "0.1.5"]]
+                        [kerodon "0.8.0"]
+                        [ring/ring-mock "0.3.1"]]
          :ring {:stacktrace-middleware prone.middleware/wrap-exceptions}}})
