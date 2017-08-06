@@ -9,12 +9,12 @@
                  [org.clojure/java.jdbc "0.3.7"]
                  [lib-noir "0.7.6"]
                  [clj-time "0.10.0"]
-                 [migratus "0.7.0"]
+                 [migratus "0.8.0"]
                  [prone "0.8.2"]
                  [ring/ring-defaults "0.1.2"]]
   :plugins [[lein-ring "0.9.2"]
             [lein-ancient "0.6.10"]
-            [migratus-lein "0.1.2"]]
+            [migratus-lein "0.5.0"]]
   :migratus {:store :database
              :migration-dir "migrations"
              :db (or (System/getenv "DATABASE_URL") "postgresql://localhost:5432/sample")}
