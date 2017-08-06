@@ -5,7 +5,7 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [compojure "1.3.1"]
                  [hiccup "1.0.5"]
-                 [postgresql/postgresql "9.1-901.jdbc4"]
+                 [postgresql/postgresql "9.3-1102.jdbc41"]
                  [org.clojure/java.jdbc "0.6.1"]
                  [lib-noir "0.7.6"]
                  [clj-time "0.10.0"]
