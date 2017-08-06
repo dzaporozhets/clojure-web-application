@@ -6,7 +6,7 @@
                  [compojure "1.6.0"]
                  [hiccup "1.0.5"]
                  [postgresql/postgresql "9.3-1102.jdbc41"]
-                 [org.clojure/java.jdbc "0.6.1"]
+                 [org.clojure/java.jdbc "0.7.0"]
                  [lib-noir "0.9.9"]
                  [clj-time "0.14.0"]
                  [migratus "0.9.8"]
