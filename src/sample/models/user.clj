@@ -10,12 +10,12 @@
 (defn get-user-by-email [email]
   (sql/query db
              ["SELECT * FROM users WHERE email = ?", email]
-             :result-set-fn first))
+             {:result-set-fn first}))
 
 (defn get-user-by-id [id]
   (sql/query db
              ["SELECT * FROM users WHERE id = ?", id]
-             :result-set-fn first))
+             {:result-set-fn first}))
 
 (defn delete-user [id]
   (sql/delete! db :users ["id = ?", id]))

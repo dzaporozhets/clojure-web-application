@@ -4,6 +4,7 @@
             [clj-time.coerce :as c]
             [clj-time.format :as f]
             [sample.models.user :as db]
+            [ring.util.anti-forgery :refer [anti-forgery-field]]
             [noir.session :as session]))
 
 (defn profile-page []
@@ -21,5 +22,6 @@
        [:span "Member since: "]
        [:strong (f/unparse (f/formatters :date) (c/from-date (:timestamp user)))]]]
      [:hr]
-     [:form {:action "/profile/delete" :method "POST"} 
+     [:form {:action "/profile/delete" :method "POST"}
+      (anti-forgery-field)
       [:button {:class "btn btn-danger btn-sm"} "Delete account"]]]))

@@ -9,8 +9,8 @@
 
 (defn create-user []
   (db/delete-user-by-email "foo@example.com")
-  (db/create-user {:name "Foo" 
-                   :email "foo@example.com" 
+  (db/create-user {:name "Foo"
+                   :email "foo@example.com"
                    :encrypted_password (crypt/encrypt "123456")}))
 
 (use-fixtures :each

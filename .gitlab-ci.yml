@@ -9,9 +9,14 @@ services:
 
 before_script:
   - lein deps
-  - lein migratus migrate
 
 test: 
+  before_script:
+    - lein migratus migrate
   script: 
     - lein test
+
+ancient:
+  script:
+    - lein ancient
 
