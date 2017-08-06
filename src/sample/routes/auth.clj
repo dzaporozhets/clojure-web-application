@@ -6,6 +6,7 @@
             [noir.validation :as vali]
             [noir.util.crypt :as crypt]
             [noir.session :as session]
+            [ring.util.anti-forgery :refer [anti-forgery-field]]
             [noir.response :as resp]))
 
 (defn valid? [email password password_confirmation]
@@ -48,6 +49,7 @@
     [:div.login-form
      [:h1 "Login with existing account"]
      (form-to [:post "/login"]
+              (anti-forgery-field)
               (input-control text-field "email" "Email" email)
               (input-control password-field "password" "Password")
               (submit-button {:class "btn btn-success"} "Login"))]))
@@ -57,6 +59,7 @@
     [:div.registration-form
      [:h1 "Let's create an account"]
      (form-to [:post "/register"]
+              (anti-forgery-field)
               (input-control text-field "name" "Name" name)
               (input-control text-field "email" "Email" email)
               (input-control password-field "password" "Password")

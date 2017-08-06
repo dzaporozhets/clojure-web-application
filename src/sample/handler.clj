@@ -8,6 +8,7 @@
             [sample.routes.profile :refer [profile-routes]]
             [sample.routes.auth :refer [auth-routes]]
             [sample.views.layout :as layout]
+            [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
             [noir.session :as session]))
 
 (def migratus-config
@@ -37,4 +38,5 @@
      home-routes
      profile-routes
      app-routes]
+    :middleware [wrap-anti-forgery]
     :access-rules [user-page]))

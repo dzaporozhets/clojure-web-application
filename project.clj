@@ -2,15 +2,16 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
-  :dependencies [[org.clojure/clojure "1.6.0"]
-                 [compojure "1.3.1"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [compojure "1.6.0"]
                  [hiccup "1.0.5"]
                  [postgresql/postgresql "9.3-1102.jdbc41"]
                  [org.clojure/java.jdbc "0.6.1"]
-                 [lib-noir "0.7.6"]
-                 [clj-time "0.10.0"]
+                 [lib-noir "0.9.9"]
+                 [clj-time "0.14.0"]
                  [migratus "0.9.8"]
                  [prone "1.1.4"]
+                 [ring/ring-anti-forgery "1.1.0"]
                  [ring/ring-defaults "0.3.1"]]
   :plugins [[lein-ring "0.9.2"]
             [lein-ancient "0.6.10"]
