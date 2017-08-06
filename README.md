@@ -43,7 +43,7 @@ are in `src/sample/models/user.clj`.
     createdb sample
 
 
-Run migrations
+Run migrations:
 
     lein migratus migrate
 
@@ -51,3 +51,5 @@ Run migrations
 To start a web server for the application, run:
 
     lein ring server
+
+Now visit http://localhost:3000/ to see the app running.
