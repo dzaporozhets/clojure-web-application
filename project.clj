@@ -14,7 +14,7 @@
                  [ring/ring-anti-forgery "1.1.0"]
                  [ring/ring-defaults "0.3.1"]]
   :plugins [[lein-ring "0.9.2"]
-            [lein-ancient "0.6.10"]
+            [lein-ancient "0.6.15"]
             [migratus-lein "0.5.0"]]
   :migratus {:store :database
              :migration-dir "migrations"
