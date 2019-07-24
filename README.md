@@ -53,3 +53,16 @@ To start a web server for the application, run:
     lein ring server
 
 Now visit http://localhost:3000/ to see the app running.
+
+## Tests
+
+To run tests you need to setup test database
+
+    # create separate database for tests
+    createdb sample-test
+
+    # pass database url to migration
+    DATABASE_URL=postgresql://localhost:5432/sample-test lein migratus migrate
+
+    # run tests
+    DATABASE_URL=postgresql://localhost:5432/sample-test lein test
