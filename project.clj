@@ -25,4 +25,5 @@
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [kerodon "0.9.1"]
                         [ring/ring-mock "0.3.2"]]
-         :ring {:stacktrace-middleware prone.middleware/wrap-exceptions}}})
+         :ring {:stacktrace-middleware prone.middleware/wrap-exceptions}}
+   :test {:prep-tasks [["migratus", "migrate"]]}})
