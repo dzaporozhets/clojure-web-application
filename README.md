@@ -1,6 +1,6 @@
 # Sample web application built with Clojure
 
-[![build status](https://gitlab.com/dzaporozhets/clojure-web-application/badges/master/build.svg)](https://gitlab.com/dzaporozhets/clojure-web-application/commits/master)
+[![pipeline status](https://gitlab.com/dzaporozhets/clojure-web-application/badges/master/pipeline.svg)](https://gitlab.com/dzaporozhets/clojure-web-application/commits/master)
 
 The goal of this project is to make blank web application with authentication and tests.
 It can be used as template for starting new project on Clojure or for learning Clojure.
