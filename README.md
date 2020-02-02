@@ -37,15 +37,13 @@ You will need [Leiningen][] 2.0.0 or above installed.
 ## Running
 
 Install PostreSQL and create database. Details of database connection now 
-are in `src/sample/models/user.clj`. 
+are in `src/sample/db.clj`. 
 
     createdb sample
-
 
 Run migrations:
 
     lein migratus migrate
-
 
 To start a web server for the application, run:
 
