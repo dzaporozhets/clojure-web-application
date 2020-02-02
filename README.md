@@ -2,18 +2,18 @@
 
 [![pipeline status](https://gitlab.com/dzaporozhets/clojure-web-application/badges/master/pipeline.svg)](https://gitlab.com/dzaporozhets/clojure-web-application/commits/master)
 
-The goal of this project is to make blank web application with authentication and tests.
-It can be used as template for starting new project on Clojure or for learning Clojure.
+The goal of this project is to make a blank web application with authentication and tests.
+It can be used as an template for starting a new project on Clojure or for learning Clojure.
 
-Merge requests to this projects are welcome!
+Merge requests to this project are welcome!
 
 ## Features
 
 * Registration
 * Login
-* Profile page with ability to remove account
+* Profile page with ability to update the password and remove the account
 * PostgreSQL database with migrations
-* Layout with Bootstrap css and jQuery
+* Layout with Bootstrap CSS and jQuery
 
 ## Screenshot
 
@@ -23,11 +23,10 @@ Just in case you are curious how it looks when started
 
 ## TODO
 
-* move details of database connection from user model to somewhere
-* add Remember me checkbox for authentication
-* add Forget password feature
-* add Email confirmation for signup
-* add ability to change name and password in profile
+* add remember me checkbox for authentication
+* add forget password feature
+* add email confirmation for signup
+* add an ability to change name in profile
 
 ## Prerequisites
 
