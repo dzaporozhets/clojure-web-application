@@ -1,22 +1,9 @@
 (ns sample.features.auth
   (:require [sample.handler :refer [app]]
-            [sample.models.user :as db]
-            [noir.util.crypt :as crypt]
+            [sample.features.helpers :refer :all]
             [kerodon.core :refer :all]
             [kerodon.test :refer :all]
             [clojure.test :refer :all]))
-
-(def foo-email "foo@example.com")
-
-(defn create-user []
-  (if-not (db/get-user-by-email foo-email)
-    (db/create-user {:name "Foo"
-                     :email foo-email
-                     :encrypted_password (crypt/encrypt "123456")})))
-
-(defn remove-users []
-  (db/delete-user-by-email foo-email)
-  (db/delete-user-by-email "bar@example.com"))
 
 (use-fixtures :each
               (fn [f]
@@ -34,6 +21,16 @@
       (follow-redirect)
       (within [:h1]
         (has (some-text? "Hello Foo")))))
+
+(deftest user-login-invalid
+  (-> (session app)
+      (visit "/")
+      (follow "Login")
+      (fill-in "Email" foo-email)
+      (fill-in "Password" "654321")
+      (press "Login")
+      (within [:form]
+        (has (some-text? "Email or password is invalid")))))
 
 (deftest user-signup
   (-> (session app)

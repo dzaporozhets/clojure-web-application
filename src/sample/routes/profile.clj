@@ -35,9 +35,17 @@
         (str "Confirmation password does not match"))
       (str "Incorrect current password"))))
 
+(defn require-user [page]
+  (if (session/get :user-id)
+    (page)
+    (resp/redirect "/login")))
+
 (defroutes profile-routes
-  (GET "/profile" [] (profile-page))
-  (GET "/profile/password" [] (password-page))
+  (GET "/profile" []
+       (require-user profile-page))
+  (GET "/profile/password" []
+       (require-user password-page))
   (POST "/profile/password/update" [current-password new-password confirm-password]
         (update-password current-password new-password confirm-password))
-  (POST "/profile/delete" [] (delete-profile)))
+  (POST "/profile/delete" []
+        (require-user delete-profile)))
