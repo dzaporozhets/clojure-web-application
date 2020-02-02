@@ -20,3 +20,6 @@
 
 (defn delete-user-by-email [email]
   (sql/delete! db :users ["email = ?", email]))
+
+(defn update-user [id params]
+  (sql/update! db :users params ["id = ?" id]))
