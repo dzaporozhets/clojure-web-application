@@ -1,8 +1,6 @@
 (ns sample.models.user
-  (:require [clojure.java.jdbc :as sql]))
-
-(def db (or (System/getenv "DATABASE_URL")
-            "postgresql://localhost:5432/sample"))
+  (:require [clojure.java.jdbc :as sql]
+            [sample.db :refer :all]))
 
 (defn create-user [user]
   (sql/insert! db :users user))
