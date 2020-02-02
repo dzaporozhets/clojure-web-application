@@ -2,8 +2,6 @@
   (:require [hiccup.page :refer [html5 include-css]]
             [hiccup.element :refer :all]
             [hiccup.form :refer :all]
-            [clj-time.coerce :as c]
-            [clj-time.format :as f]
             [sample.models.user :as db]
             [sample.helpers :refer :all]
             [ring.util.anti-forgery :refer [anti-forgery-field]]
