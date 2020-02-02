@@ -1,3 +1,3 @@
 jQuery(document).ready(function() {
-  jQuery("time.timeago").timeago();
+  // put your code here
 });

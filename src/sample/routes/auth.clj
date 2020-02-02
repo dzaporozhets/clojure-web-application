@@ -3,10 +3,10 @@
             [compojure.core :refer :all]
             [sample.models.user :as db]
             [sample.views.layout :as layout]
+            [sample.views.auth :as view]
             [noir.validation :as vali]
             [noir.util.crypt :as crypt]
             [noir.session :as session]
-            [ring.util.anti-forgery :refer [anti-forgery-field]]
             [noir.response :as resp]))
 
 (defn valid? [email password password_confirmation]
@@ -26,16 +26,6 @@
     (session/put! :user-name (:name user))
     (session/put! :user-email (:email user))))
 
-(defn error-item [[error]]
-  [:div.text-danger error])
-
-(defn input-control [type id name & [value]]
-  [:div.form-group
-   (list
-     (label id name)
-     (vali/on-error (keyword id) error-item)
-     (type {:class "form-control"} id value))])
-
 (defn format-error [id ex]
   (cond
     (and (instance? org.postgresql.util.PSQLException ex)
@@ -46,25 +36,11 @@
 
 (defn login-page [& [email]]
   (layout/common
-    [:div.login-form
-     [:h1 "Login with existing account"]
-     (form-to [:post "/login"]
-              (anti-forgery-field)
-              (input-control text-field "email" "Email" email)
-              (input-control password-field "password" "Password")
-              (submit-button {:class "btn btn-success"} "Login"))]))
+    (view/login-page email)))
 
 (defn registration-page [& [name email]]
   (layout/common
-    [:div.registration-form
-     [:h1 "Let's create an account"]
-     (form-to [:post "/register"]
-              (anti-forgery-field)
-              (input-control text-field "name" "Name" name)
-              (input-control text-field "email" "Email" email)
-              (input-control password-field "password" "Password")
-              (input-control password-field "password_confirmation" "Repeat password")
-              (submit-button {:class "btn btn-success"} "Create account"))]))
+    (view/registration-page name email)))
 
 (defn handle-login [email password]
   (let [user (db/get-user-by-email email)]
@@ -90,7 +66,6 @@
         (vali/rule false [:email (format-error email ex)])
         (registration-page)))
     (registration-page name email)))
-
 
 (defroutes auth-routes
   (GET "/register" []

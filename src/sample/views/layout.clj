@@ -12,7 +12,7 @@
       [:a {:class "Register" :href "/register"} "Register"]]]))
 
 (defn user-menu [user]
-  (list 
+  (list
     [:ul {:class "nav navbar-nav navbar-right"}
      [:li
       [:a {:class "profile" :href "/profile"} "Profile"]]
@@ -31,7 +31,6 @@
      (include-css "/css/bootstrap.min.css")
      (include-css "/css/application.css")
      (include-js "/js/jquery-1.11.3.min.js")
-     (include-js "/js/jquery.timeago.js")
      (include-js "/js/application.js")]
     [:body content]))
 
@@ -40,7 +39,7 @@
     [:header.navbar.navbar-default.navbar-static-top.navbar-default
      [:div.container
       [:div.navbar-header
-       [:a.navbar-brand {:href "/"} 
+       [:a.navbar-brand {:href "/"}
         [:strong "sample"]]]
       (if-let [user (session/get :user-id)]
         (user-menu user)
