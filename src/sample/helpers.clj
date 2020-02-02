@@ -11,8 +11,8 @@
 (defn current-user []
   (user-db/get-user-by-id (current-user-id)))
 
-(defn input-control [type id name & [value]]
+(defn input-control [type id name & [value required]]
   [:div.form-group
    (list
      (label id name)
-     (type {:class "form-control"} id value))])
+     (type {:class "form-control" :required required} id value))])

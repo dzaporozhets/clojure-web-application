@@ -23,18 +23,20 @@
       [:p
        [:span "Member since: "]
        [:strong (f/unparse (f/formatters :date) (c/from-date (:timestamp user)))]]]
-      [:p
-       [:a {:href "/profile/password"} "Change password"]]
      [:hr]
+     [:div
+      [:a {:href "/profile/password" :class "btn btn-default"} "Change password"]]
+     [:br]
      [:form {:action "/profile/delete" :method "POST"}
       (anti-forgery-field)
-      [:button {:class "btn btn-danger btn-sm"} "Delete account"]]]))
+      [:button {:class "btn btn-danger" :onclick "return confirm(\"Are you sure?\");"} "Delete account"]]]))
 
 (defn password-page []
   [:div
    [:h1 "Change password"]
    (form-to [:post "/profile/password/update"]
-            (input-control password-field "current-password" "Current password")
-            (input-control password-field "new-password" "New password")
-            (input-control password-field "confirm-password" "Confirm new password")
+            (anti-forgery-field)
+            (input-control password-field "current-password" "Current password" nil true)
+            (input-control password-field "new-password" "New password" nil true)
+            (input-control password-field "confirm-password" "Confirm new password" nil true)
             (submit-button {:class "btn btn-primary"} "Change password"))])
