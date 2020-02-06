@@ -14,7 +14,6 @@
                  [ring/ring-anti-forgery "1.3.0"]
                  [ring/ring-defaults "0.3.2"]]
   :plugins [[lein-ring "0.12.5"]
-            [lein-ancient "0.6.15"]
             [migratus-lein "0.5.0"]]
   :migratus {:store :database
              :migration-dir "migrations"
@@ -25,5 +24,7 @@
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [kerodon "0.9.1"]
                         [ring/ring-mock "0.3.2"]]
+         :plugins [[lein-kibit "0.1.5"]
+                   [lein-ancient "0.6.15"]]
          :ring {:stacktrace-middleware prone.middleware/wrap-exceptions}}
    :test {:prep-tasks [["migratus", "migrate"]]}})
