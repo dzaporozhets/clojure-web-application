@@ -29,7 +29,7 @@
 (defn format-error [id ex]
   (cond
     (and (instance? org.postgresql.util.PSQLException ex)
-         (= 0 (.getErrorCode ex)))
+         (zero? (.getErrorCode ex)))
     (str "User with same email already exists")
     :else
     "An error accured while processing this request"))

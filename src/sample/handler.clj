@@ -17,11 +17,7 @@
    :db (or (System/getenv "DATABASE_URL") "postgresql://localhost:5432/sample")})
 
 (defn init []
- (do
-   (migratus/migrate migratus-config)))
-
-(defn user-page [_]
-  (session/get :user-id))
+  (migratus/migrate migratus-config))
 
 (defn not-found []
   (layout/base
@@ -38,5 +34,4 @@
      home-routes
      profile-routes
      app-routes]
-    :middleware [wrap-anti-forgery]
-    :access-rules [user-page]))
+    :middleware [wrap-anti-forgery]))
