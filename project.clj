@@ -10,7 +10,7 @@
                  [lib-noir "0.9.9"]
                  [clj-time "0.15.2"]
                  [migratus "1.2.7"]
-                 [prone "1.6.4"]
+                 [prone "2020-01-17"]
                  [ring/ring-anti-forgery "1.3.0"]
                  [ring/ring-defaults "0.3.2"]]
   :plugins [[lein-ring "0.12.5"]
@@ -23,7 +23,7 @@
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [kerodon "0.9.1"]
-                        [ring/ring-mock "0.3.2"]]
+                        [ring/ring-mock "0.4.0"]]
          :plugins [[lein-kibit "0.1.5"]
                    [lein-ancient "0.6.15"]]
          :ring {:stacktrace-middleware prone.middleware/wrap-exceptions}}
