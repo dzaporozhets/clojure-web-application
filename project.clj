@@ -3,13 +3,13 @@
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.10.1"]
-                 [compojure "1.6.1"]
+                 [compojure "1.6.2"]
                  [hiccup "1.0.5"]
-                 [org.postgresql/postgresql "42.2.9"]
+                 [org.postgresql/postgresql "42.2.14"]
                  [org.clojure/java.jdbc "0.7.11"]
                  [lib-noir "0.9.9"]
                  [clj-time "0.15.2"]
-                 [migratus "1.2.7"]
+                 [migratus "1.2.8"]
                  [prone "2020-01-17"]
                  [ring/ring-anti-forgery "1.3.0"]
                  [ring/ring-defaults "0.3.2"]]
