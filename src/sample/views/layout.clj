@@ -1,7 +1,6 @@
 (ns sample.views.layout
   (:require [hiccup.page :refer [html5 include-css include-js]]
-            [hiccup.element :refer [link-to]]
-            [noir.session :as session]))
+            [hiccup.element :refer [link-to]]))
 
 (defn guest-menu []
   (list
@@ -34,14 +33,14 @@
      (include-js "/js/application.js")]
     [:body content]))
 
-(defn common [& content]
+(defn common [& [content user]]
   (base
     [:header.navbar.navbar-default.navbar-static-top.navbar-default
      [:div.container
       [:div.navbar-header
        [:a.navbar-brand {:href "/"}
         [:strong "sample"]]]
-      (if-let [user (session/get :user-id)]
+      (if user
         (user-menu user)
         (guest-menu))]]
     [:div.container content]))
