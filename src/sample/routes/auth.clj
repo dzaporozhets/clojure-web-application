@@ -1,80 +1,67 @@
 (ns sample.routes.auth
   (:require [hiccup.form :refer :all]
             [compojure.core :refer :all]
+            [ring.util.response :as response]
             [sample.models.user :as db]
+            [sample.helpers :refer :all]
             [sample.views.layout :as layout]
             [sample.views.auth :as view]
-            [noir.validation :as vali]
-            [noir.util.crypt :as crypt]
-            [noir.session :as session]
-            [noir.response :as resp]))
+            [struct.core :as st]
+            [noir.util.crypt :as crypt]))
 
-(defn valid? [email password password_confirmation]
-  (vali/rule (vali/has-value? name)
-             [:name "You should provide name"])
-  (vali/rule (vali/has-value? email)
-             [:email "You should provide email"])
-  (vali/rule (vali/min-length? password 6)
-             [:password "Password must be at least 6 characters"])
-  (vali/rule (= password password_confirmation)
-             [:password "Password conformation does not match"])
-  (not (vali/errors? :email :password :password_confirmation)))
+(def auth-register-scheme
+  {:name [st/required st/string]
+   :email [st/required st/email]
+   :password [st/required [st/min-count 6]]
+   :password-confirmation [st/required [st/identical-to :password]]})
+
+(defn validate-user [name email password password-confirmation]
+  (st/validate {:name name
+                :email email
+                :password password
+                :password-confirmation password-confirmation} auth-register-scheme))
 
 (defn user-to-session [user]
-  (do
-    (session/put! :user-id (:id user))
-    (session/put! :user-name (:name user))
-    (session/put! :user-email (:email user))))
+  {:user-id (:id user)
+   :user-name (:name user)
+   :user-email (:email user)})
 
-(defn format-error [id ex]
-  (cond
-    (and (instance? org.postgresql.util.PSQLException ex)
-         (zero? (.getErrorCode ex)))
-    (str "User with same email already exists")
-    :else
-    "An error accured while processing this request"))
-
-(defn login-page [& [email]]
+(defn login-page [& [email errors]]
   (layout/common
-    (view/login-page email)))
+    (view/login-page email errors)))
 
-(defn registration-page [& [name email]]
+(defn registration-page [& [name email errors]]
   (layout/common
-    (view/registration-page name email)))
+    (view/registration-page name email errors)))
 
 (defn handle-login [email password]
   (let [user (db/get-user-by-email email)]
     (if (and user (crypt/compare password (:encrypted_password user)))
-      (do
-        (user-to-session user)
-        (resp/redirect "/"))
-      (do
-        (vali/rule false [:email "Email or password is invalid"])
-        (login-page)))))
+      (assoc (response/redirect "/") :session (user-to-session user))
+      (login-page email {:email "Email or password is invalid"}))))
 
 (defn handle-logout []
-  (session/clear!)
-  (resp/redirect "/"))
+  (assoc (response/redirect "/") :session nil))
 
-(defn handle-registration [name email password password_confirmation]
-  (if (valid? email password password_confirmation)
-    (try
-      (db/create-user {:name name :email email :encrypted_password (crypt/encrypt password)})
-      (user-to-session (db/get-user-by-email email))
-      (resp/redirect "/")
-      (catch Exception ex
-        (vali/rule false [:email (format-error email ex)])
-        (registration-page)))
-    (registration-page name email)))
+(defn handle-registration [name email password password-confirmation]
+  (let [errors (first (validate-user name email password password-confirmation))]
+    (if errors
+      (registration-page name email errors)
+      (if (db/get-user-by-email email)
+        (registration-page name email {:email "User with the same email already exists"})
+        (do
+          (db/create-user {:name name :email email :encrypted_password (crypt/encrypt password)})
+          (let [user (db/get-user-by-email email)]
+            (assoc (response/redirect "/") :session (user-to-session user))))))))
 
 (defroutes auth-routes
-  (GET "/register" []
-       (registration-page))
-  (POST "/register" [name email password password_confirmation]
-        (handle-registration name email password password_confirmation))
   (GET "/login" []
        (login-page))
+  (GET "/logout" []
+       (handle-logout))
+  (GET "/register" []
+       (registration-page))
   (POST "/login" [email password]
        (handle-login email password))
-  (GET "/logout" []
-       (handle-logout)))
+  (POST "/register" [name email password password-confirmation]
+        (handle-registration name email password password-confirmation)))

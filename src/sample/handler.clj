@@ -1,15 +1,12 @@
 (ns sample.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
-            [noir.util.middleware :as noir-middleware]
-            [noir.session :as session]
             [migratus.core :as migratus]
             [sample.routes.home :refer [home-routes]]
             [sample.routes.profile :refer [profile-routes]]
             [sample.routes.auth :refer [auth-routes]]
             [sample.views.layout :as layout]
-            [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
-            [noir.session :as session]))
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
 (def migratus-config
   {:store :database
@@ -24,14 +21,16 @@
     [:center
      [:h1 "404. Page not found!"]]))
 
-(defroutes app-routes
+(defroutes static-routes
   (route/resources "/")
   (route/not-found (not-found)))
 
+(def app-routes
+  (routes
+    auth-routes
+    home-routes
+    profile-routes
+    static-routes))
+
 (def app
-  (noir-middleware/app-handler
-    [auth-routes
-     home-routes
-     profile-routes
-     app-routes]
-    :middleware [wrap-anti-forgery]))
+  (wrap-defaults app-routes site-defaults))

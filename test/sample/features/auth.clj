@@ -45,6 +45,30 @@
       (within [:h1]
         (has (some-text? "Hello Bar")))))
 
+(deftest user-signup-short-password
+  (-> (session app)
+      (visit "/")
+      (follow "Register")
+      (fill-in "Name" "Bar")
+      (fill-in "Email" "bar@example.com")
+      (fill-in "Password" "123")
+      (fill-in "Repeat password" "123")
+      (press "Create account")
+      (within [:form]
+        (has (some-text? "less than the minimum 6")))))
+
+(deftest user-signup-password-mismatch
+  (-> (session app)
+      (visit "/")
+      (follow "Register")
+      (fill-in "Name" "Bar")
+      (fill-in "Email" "bar@example.com")
+      (fill-in "Password" "123456")
+      (fill-in "Repeat password" "123457")
+      (press "Create account")
+      (within [:form]
+        (has (some-text? "does not match")))))
+
 (deftest user-signup-exists
   (-> (session app)
       (visit "/")
@@ -55,4 +79,4 @@
       (fill-in "Repeat password" "123456")
       (press "Create account")
       (within [:form]
-        (has (some-text? "User with same email already exists")))))
+        (has (some-text? "User with the same email already exists")))))

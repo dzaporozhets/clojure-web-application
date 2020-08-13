@@ -4,25 +4,25 @@
             [hiccup.form :refer :all]
             [sample.models.user :as db]
             [sample.helpers :refer :all]
-            [ring.util.anti-forgery :refer [anti-forgery-field]]
-            [noir.session :as session]))
+            [struct.core :as st]
+            [ring.util.anti-forgery :refer [anti-forgery-field]]))
 
-(defn login-page [& [email]]
+(defn login-page [& [email errors]]
   [:div.login-form
    [:h1 "Login with existing account"]
    (form-to [:post "/login"]
             (anti-forgery-field)
-            (input-control text-field "email" "Email" email)
-            (input-control password-field "password" "Password")
+            (input-control text-field "email" "Email" email true (:email errors))
+            (input-control password-field "password" "Password" nil true)
             (submit-button {:class "btn btn-success"} "Login"))])
 
-(defn registration-page [& [name email]]
+(defn registration-page [& [name email errors]]
   [:div.registration-form
    [:h1 "Let's create an account"]
    (form-to [:post "/register"]
             (anti-forgery-field)
-            (input-control text-field "name" "Name" name)
-            (input-control text-field "email" "Email" email)
-            (input-control password-field "password" "Password")
-            (input-control password-field "password_confirmation" "Repeat password")
+            (input-control text-field "name" "Name" name true (:name errors))
+            (input-control text-field "email" "Email" email true (:email errors))
+            (input-control password-field "password" "Password" nil true (:password errors))
+            (input-control password-field "password-confirmation" "Repeat password" nil true (:password-confirmation errors))
             (submit-button {:class "btn btn-success"} "Create account"))])

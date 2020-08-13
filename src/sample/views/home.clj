@@ -1,7 +1,6 @@
 (ns sample.views.home
-  (:require [hiccup.element :refer :all]
-            [noir.session :as session]))
+  (:require [hiccup.element :refer :all]))
 
-(defn home []
+(defn home [user]
   [:div
-   [:h1 "Hello " (session/get :user-name)]])
+   [:h1 "Hello " (:name user)]])

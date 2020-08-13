@@ -4,6 +4,7 @@
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [compojure "1.6.2"]
+                 [funcool/struct "1.3.0"]
                  [hiccup "1.0.5"]
                  [org.postgresql/postgresql "42.2.14"]
                  [org.clojure/java.jdbc "0.7.11"]
