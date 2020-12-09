@@ -1,6 +1,6 @@
 (ns sample.routes.profile
   (:require [compojure.core :refer :all]
-            [noir.util.crypt :as crypt]
+            [sample.crypt :as crypt]
             [ring.util.response :as response]
             [sample.helpers :refer :all]
             [sample.models.user :as db]
@@ -23,7 +23,7 @@
   (layout/common (view/password-page user) user))
 
 (defn update-password [current-password new-password confirm-password user]
-  (if (crypt/compare current-password (:encrypted_password user))
+  (if (crypt/verify current-password (:encrypted_password user))
     (if (= new-password confirm-password)
       (do
         (db/update-user (:id user) {:encrypted_password (crypt/encrypt new-password)})
