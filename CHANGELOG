@@ -1,3 +1,6 @@
+1.2.0
+- Remove lib-noir dependency
+
 1.1.0
 - Introduce struct for validation
 - Drop lib noir sessions and validation

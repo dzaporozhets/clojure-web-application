@@ -1,7 +1,7 @@
 (ns sample.features.helpers
   (:require [sample.handler :refer [app]]
             [sample.models.user :as db]
-            [noir.util.crypt :as crypt]
+            [sample.crypt :as crypt]
             [kerodon.core :refer :all]
             [kerodon.test :refer :all]
             [clojure.test :refer :all]))

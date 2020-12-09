@@ -2,12 +2,12 @@
   (:require [hiccup.form :refer :all]
             [compojure.core :refer :all]
             [ring.util.response :as response]
+            [sample.crypt :as crypt]
             [sample.models.user :as db]
             [sample.helpers :refer :all]
             [sample.views.layout :as layout]
             [sample.views.auth :as view]
-            [struct.core :as st]
-            [noir.util.crypt :as crypt]))
+            [struct.core :as st]))
 
 (def auth-register-scheme
   {:name [st/required st/string]
@@ -36,7 +36,7 @@
 
 (defn handle-login [email password]
   (let [user (db/get-user-by-email email)]
-    (if (and user (crypt/compare password (:encrypted_password user)))
+    (if (and user (crypt/verify password (:encrypted_password user)))
       (assoc (response/redirect "/") :session (user-to-session user))
       (login-page email {:email "Email or password is invalid"}))))
 
