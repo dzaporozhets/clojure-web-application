@@ -30,6 +30,23 @@
       (within [:h1]
         (has (some-text? "Login with existing account")))))
 
+(deftest profile-change-name
+  (-> (session app)
+      (visit "/")
+      (follow "Login")
+      (fill-in "Email" foo-email)
+      (fill-in "Password" "123456")
+      (press "Login")
+      (follow-redirect)
+      (visit "/profile/edit")
+      (fill-in "User name" "XYZ")
+      (press "Save changes")
+      (follow-redirect)
+      (within [:h1]
+        (has (some-text? "Profile")))
+      (within [:.user-info]
+        (has (some-text? "XYZ")))))
+
 (deftest profile-change-password
   (-> (session app)
       (visit "/")
