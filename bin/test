@@ -1,2 +1,1 @@
-DATABASE_URL=postgresql://localhost:5432/sample-test lein migratus migrate
 DATABASE_URL=postgresql://localhost:5432/sample-test lein test
