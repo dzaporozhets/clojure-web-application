@@ -58,6 +58,19 @@ The repository contains the `Dockerfile`. You can build and run the app with Doc
 App will be running on port `5000` by default. Database is not included. 
 So make sure to pass a `DATABASE_URL` to the container.
 
+### Running on Heroku
+
+Clone the repository and cd into it. Then execute next commands:
+
+```
+heroku create
+heroku addons:create heroku-postgresql:hobby-dev
+git push heroku master
+heroku open
+```
+
+The last command should open the application in your browser. 
+
 ## Database
 
 Application reads the `DATABASE_URL` environment variable for the database connection. 
