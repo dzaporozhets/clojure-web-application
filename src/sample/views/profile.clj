@@ -22,12 +22,21 @@
      [:span "Member since: "]
      [:strong (f/unparse (f/formatters :date) (c/from-date (:timestamp user)))]]]
    [:hr]
-   [:div
+   [:div {:class "btn-group"}
+    [:a {:href "/profile/edit" :class "btn btn-default"} "Edit profile"]
     [:a {:href "/profile/password" :class "btn btn-default"} "Change password"]]
-   [:br]
+   [:hr]
    [:form {:action "/profile/delete" :method "POST"}
     (anti-forgery-field)
     [:button {:class "btn btn-danger" :type "submit" :onclick "return confirm(\"Are you sure?\");"} "Delete account"]]])
+
+(defn profile-edit-page [user & [errors]]
+  [:div
+   [:h1 "Edit profile"]
+   (form-to [:post "/profile/update"]
+            (anti-forgery-field)
+            (input-control text-field "name" "User name" (:name user) true)
+            (submit-button {:class "btn btn-primary"} "Save changes"))])
 
 (defn password-page [user & [errors]]
   [:div

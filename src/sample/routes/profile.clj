@@ -19,8 +19,16 @@
 (defn profile-page [user]
   (layout/common (view/profile-page user) user))
 
+(defn profile-edit-page [user]
+  (layout/common (view/profile-edit-page user) user))
+
 (defn password-page [user]
   (layout/common (view/password-page user) user))
+
+(defn update-profile [name user]
+  (do
+    (db/update-user (:id user) {:name name})
+    (response/redirect "/profile")))
 
 (defn update-password [current-password new-password confirm-password user]
   (if (crypt/verify current-password (:encrypted_password user))
@@ -40,6 +48,14 @@
                   (if user-id
                     (profile-page (get-user user-id))
                     (response/redirect "/login")))
+             (GET "/edit" []
+                  (if user-id
+                    (profile-edit-page (get-user user-id))
+                    (response/redirect "/login")))
+             (POST "/update" [name]
+                   (if user-id
+                     (update-profile name (get-user user-id))
+                     (response/redirect "/login")))
              (GET "/password" []
                   (if user-id
                     (password-page (get-user user-id))

@@ -26,7 +26,6 @@ Just in case you are curious how it looks when started
 * add remember me checkbox for authentication
 * add forget password feature
 * add email confirmation for signup
-* add an ability to change name in profile
 
 ## Prerequisites
 
