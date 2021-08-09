@@ -2,18 +2,18 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
-  :dependencies [[org.clojure/clojure "1.10.1"]
+  :dependencies [[org.clojure/clojure "1.10.3"]
                  [clojurewerkz/scrypt "1.2.0"]
                  [compojure "1.6.2"]
                  [funcool/struct "1.4.0"]
                  [hiccup "1.0.5"]
-                 [org.postgresql/postgresql "42.2.18"]
-                 [org.clojure/java.jdbc "0.7.11"]
+                 [org.postgresql/postgresql "42.2.23"]
+                 [org.clojure/java.jdbc "0.7.12"]
                  [clj-time "0.15.2"]
-                 [migratus "1.3.3"]
-                 [prone "2020-01-17"]
+                 [migratus "1.3.5"]
+                 [prone "2021-04-23"]
                  [ring/ring-anti-forgery "1.3.0"]
-                 [ring/ring-defaults "0.3.2"]]
+                 [ring/ring-defaults "0.3.3"]]
   :plugins [[lein-ring "0.12.5"]
             [migratus-lein "0.5.0"]]
   :migratus {:store :database
