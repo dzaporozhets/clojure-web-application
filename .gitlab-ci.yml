@@ -6,7 +6,7 @@ variables:
   DATABASE_URL: "postgresql://postgres@postgres:5432/sample-test"
 
 services:
-  - postgres:11
+  - postgres:12
 
 stages:
   - test
