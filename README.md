@@ -1,6 +1,6 @@
 # Sample web application built with Clojure
 
-[![pipeline status](https://gitlab.com/dzaporozhets/clojure-web-application/badges/master/pipeline.svg)](https://gitlab.com/dzaporozhets/clojure-web-application/commits/master)
+[![pipeline status](https://gitlab.com/dzaporozhets/clojure-web-application/badges/main/pipeline.svg)](https://gitlab.com/dzaporozhets/clojure-web-application/commits/main)
 
 The goal of this project is to make a blank web application with authentication and tests.
 It can be used as an template for starting a new project on Clojure or for learning Clojure.
@@ -23,7 +23,7 @@ Just in case you are curious how it looks when started
 
 ## Prerequisites
 
-1. [Leiningen][https://github.com/technomancy/leiningen] 2.0.0 or above installed. 
+1. [Leiningen][https://github.com/technomancy/leiningen] 2.0.0 or above installed.
 2. PostgreSQL
 
 ## Features
@@ -55,7 +55,7 @@ Now visit http://localhost:3000/ to see the app running.
 ### Run as container
 
 The repository contains the `Dockerfile`. You can build and run the app with Docker.
-App will be running on port `5000` by default. Database is not included. 
+App will be running on port `5000` by default. Database is not included.
 So make sure to pass a `DATABASE_URL` to the container.
 
 ### Running on Heroku
@@ -65,20 +65,20 @@ Clone the repository and cd into it. Then execute next commands:
 ```
 heroku create
 heroku addons:create heroku-postgresql:hobby-dev
-git push heroku master
+git push heroku main
 heroku open
 ```
 
-The last command should open the application in your browser. 
+The last command should open the application in your browser.
 
 ## Database
 
-Application reads the `DATABASE_URL` environment variable for the database connection. 
-If none provided, it will use the default value from `src/sample/db.clj`. 
+Application reads the `DATABASE_URL` environment variable for the database connection.
+If none provided, it will use the default value from `src/sample/db.clj`.
 
 ### Migrations
 
-Migrations are run automatically when you start the app or tests. 
+Migrations are run automatically when you start the app or tests.
 If you need to manually run migrations, you can use next command:
 
     lein migratus migrate
