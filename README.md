@@ -33,12 +33,13 @@ Just in case you are curious how it looks when started
 * Profile page with ability to update the password and remove the account
 * PostgreSQL database with migrations
 * Layout with Bootstrap CSS and jQuery
+* Send email confirmation on signup (optional)
 
 ### TODO
 
 * add remember me checkbox for authentication
 * add forget password feature
-* add email confirmation for signup
+* avatar upload
 
 ## Running
 

@@ -12,6 +12,7 @@
                  [clj-time "0.15.2"]
                  [migratus "1.3.5"]
                  [prone "2021-04-23"]
+                 [com.draines/postal "2.0.4"]
                  [ring/ring-anti-forgery "1.3.0"]
                  [ring/ring-defaults "0.3.4"]]
   :plugins [[lein-ring "0.12.5"]
