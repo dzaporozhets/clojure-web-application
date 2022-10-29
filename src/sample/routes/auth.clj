@@ -1,6 +1,7 @@
 (ns sample.routes.auth
   (:require [hiccup.form :refer :all]
             [compojure.core :refer :all]
+            [postal.core :refer [send-message]]
             [ring.util.response :as response]
             [sample.crypt :as crypt]
             [sample.models.user :as db]
@@ -52,6 +53,15 @@
         (do
           (db/create-user {:name name :email email :encrypted_password (crypt/encrypt password)})
           (let [user (db/get-user-by-email email)]
+            (if (System/getenv "SMTP_FROM")
+              (println (send-message {:user (System/getenv "SMTP_USER")
+                                      :pass (System/getenv "SMTP_PASSWORD")
+                                      :host (System/getenv "SMTP_HOST")
+                                      :port 587}
+                                     {:from (System/getenv "SMTP_FROM")
+                                      :to (:email user)
+                                      :subject "Account Registration"
+                                      :body "You succefully created an account"})))
             (assoc (response/redirect "/") :session (user-to-session user))))))))
 
 (defroutes auth-routes
