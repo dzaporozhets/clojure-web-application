@@ -9,3 +9,4 @@ pom.xml.asc
 /.lein-*
 /.nrepl-port
 .DS_Store
+resources/public/avatars/

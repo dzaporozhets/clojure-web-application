@@ -5,6 +5,7 @@
             [sample.routes.home :refer [home-routes]]
             [sample.routes.profile :refer [profile-routes]]
             [sample.routes.auth :refer [auth-routes]]
+            [sample.routes.files :refer [files-routes]]
             [sample.views.layout :as layout]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
@@ -30,6 +31,7 @@
     auth-routes
     home-routes
     profile-routes
+    files-routes
     static-routes))
 
 (def app

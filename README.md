@@ -34,12 +34,12 @@ Just in case you are curious how it looks when started
 * PostgreSQL database with migrations
 * Layout with Bootstrap CSS and jQuery
 * Send email confirmation on signup (optional)
+* Avatar upload
 
 ### TODO
 
 * add remember me checkbox for authentication
 * add forget password feature
-* avatar upload
 
 ## Running
 

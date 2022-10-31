@@ -2,8 +2,10 @@
   (:require [compojure.core :refer :all]
             [sample.crypt :as crypt]
             [ring.util.response :as response]
+            [clojure.java.io :as io]
             [sample.helpers :refer :all]
             [sample.models.user :as db]
+            [sample.models.avatar :as avatar-db]
             [sample.views.layout :as layout]
             [sample.views.profile :as view]))
 
@@ -25,9 +27,13 @@
 (defn password-page [user]
   (layout/common (view/password-page user) user))
 
-(defn update-profile [name user]
+(defn update-profile [name user file]
   (do
     (db/update-user (:id user) {:name name})
+    (when (seq (:filename file))
+      (avatar-db/create-avatar {:user_id (:id user)
+                                :name (:filename file)})
+      (io/copy (:tempfile file) (io/file "resources" "public" "avatars" (:filename file))))
     (response/redirect "/profile")))
 
 (defn update-password [current-password new-password confirm-password user]
@@ -52,9 +58,9 @@
                   (if user-id
                     (profile-edit-page (get-user user-id))
                     (response/redirect "/login")))
-             (POST "/update" [name]
+             (POST "/update" [name file]
                    (if user-id
-                     (update-profile name (get-user user-id))
+                     (update-profile name (get-user user-id) file)
                      (response/redirect "/login")))
              (GET "/password" []
                   (if user-id
