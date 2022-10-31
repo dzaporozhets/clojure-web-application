@@ -4,6 +4,7 @@
             [hiccup.form :refer :all]
             [clj-time.coerce :as c]
             [clj-time.format :as f]
+            [sample.models.avatar :as avatar-db]
             [sample.models.user :as db]
             [sample.helpers :refer :all]
             [ring.util.anti-forgery :refer [anti-forgery-field]]))
@@ -12,6 +13,9 @@
   [:div
    [:h1 "Profile"]
    [:div {:class "user-info"}
+    (if-let [avatar (avatar-db/get-avatar-by-user (:id user))]
+      [:div
+       [:img {:src (avatar-uri (:name avatar)) :width 200 :class "avatar-preview"}]])
     [:p
      [:span "Name: "]
      [:strong (:name user)]]
@@ -33,10 +37,15 @@
 (defn profile-edit-page [user & [errors]]
   [:div
    [:h1 "Edit profile"]
-   (form-to [:post "/profile/update"]
+   (form-to {:enctype "multipart/form-data"} [:post "/profile/update"]
             (anti-forgery-field)
-            (input-control text-field "name" "User name" (:name user) true)
-            (submit-button {:class "btn btn-primary"} "Save changes"))])
+            [:div {:class "change-user-info"}
+             (input-control text-field "name" "User name" (:name user) true)]
+            [:div {:class "form-group"}
+               (label "file" "Avatar")
+               (file-upload :file)]
+            [:div
+             (submit-button {:class "btn btn-primary"} "Save changes")])])
 
 (defn password-page [user & [errors]]
   [:div
