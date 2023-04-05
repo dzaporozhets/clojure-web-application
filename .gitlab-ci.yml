@@ -12,6 +12,7 @@
 #     DOCKER_USER: ...
 #     DOCKER_PASSWORD: ...
 image: clojure:latest
+
 variables:
   POSTGRES_DB: sample-test
   POSTGRES_HOST_AUTH_METHOD: trust
@@ -19,6 +20,7 @@ variables:
 services:
 - postgres:12
 stages:
+- build
 - test
 test:
   stage: test
@@ -36,3 +38,4 @@ kibit:
   - lein kibit
 include:
 - template: Jobs/Container-Scanning.gitlab-ci.yml
+- template: Jobs/Build.gitlab-ci.yml
