@@ -1,29 +1,38 @@
-image: clojure:latest
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 
+# container_scanning:
+#   variables:
+#     DOCKER_IMAGE: ...
+#     DOCKER_USER: ...
+#     DOCKER_PASSWORD: ...
+image: clojure:latest
 variables:
   POSTGRES_DB: sample-test
   POSTGRES_HOST_AUTH_METHOD: trust
-  DATABASE_URL: "postgresql://postgres@postgres:5432/sample-test"
-
+  DATABASE_URL: postgresql://postgres@postgres:5432/sample-test
 services:
-  - postgres:12
-
+- postgres:12
 stages:
-  - test
-
+- test
 test:
   stage: test
   script:
-    - lein migratus migrate
-    - lein test
-
+  - lein migratus migrate
+  - lein test
 ancient:
   stage: test
   script:
-    - lein ancient
+  - lein ancient
   allow_failure: true
-
 kibit:
   stage: test
   script:
-    - lein kibit
+  - lein kibit
+include:
+- template: Jobs/Container-Scanning.gitlab-ci.yml
