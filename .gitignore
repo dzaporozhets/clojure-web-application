@@ -10,3 +10,5 @@ pom.xml.asc
 /.nrepl-port
 .DS_Store
 resources/public/avatars/
+.clj-kondo
+.lsp
